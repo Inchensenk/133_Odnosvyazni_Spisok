@@ -24,7 +24,7 @@
     <ProjectGuid>{d6a0412c-acf7-42df-aa8d-cbb52d4a8f6a}</ProjectGuid>
     <RootNamespace>My133OdnosvyazniSpisok</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>133_134_Odnosvyazni_Spisok</ProjectName>
+    <ProjectName>133_134_135_Odnosvyazni_Spisok</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
