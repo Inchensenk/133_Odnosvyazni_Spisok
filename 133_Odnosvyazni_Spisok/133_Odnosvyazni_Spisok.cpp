@@ -306,6 +306,7 @@ void List<T>::removeAt(int index)
     }
 }
 удаление с конца списка pop_back():
+для этого используем предыдущий метод и передаем ему индекс последнего элемента списка
 template<typename T>
 void List<T>::pop_back()
 {
