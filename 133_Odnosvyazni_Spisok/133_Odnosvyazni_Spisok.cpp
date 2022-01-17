@@ -273,6 +273,44 @@ previus->pNext = newNode;
 
 
 Удаление узла по индексу removeAt():
+template<typename T>
+void List<T>::removeAt(int index)
+{
+    //если индекс равен нулю
+    if (0==index)
+    {
+        //то удаляем нулевой узел
+        pop_front();
+    }
+    else
+    {
+#pragma region Нахождение предыдущего элемента относительно искомого индекса
+        //Если бы это был реальный проект, то эту часть кода нужно было бы вынести в отдельный метод, так как он повторяется в нескольких методах, но для понимания лучше оставить так
+        Node<T>* previous = this->head;
+        for (size_t i = 0; i < index-1; i++)
+        {
+            previous = previous->pNext;
+        }
+#pragma endregion
+        //предыдущему элементу указываем адрес элемента находящегося после элемента который мы удаляем
+        //то есть поле адреса(адрес элемента стоящего после удаляемого) удаляемого узла передаем полю адреса узла стоящим перед удаляемым, чтобы связь в списке не нарушилась
+        //переменная toDelete нужна, чтобы найти удаляемый элемент, так как после измения указателя у поля узла стоящим перед удаляемым узлом на адрес стоящего после удаляемого узла
+        //если не сохранить адрес удаляемого узла, мы не сможем его найти и удалить, по этому переменная toDelete хранит адрес удаляемого узла
+        Node <T>* toDelete = previous->pNext;
+        //присваиваем предыдущему узлу адрес узла стоящего после удаляемого
+        previous->pNext = toDelete->pNext;
+        //очищаем память
+        delete toDelete;
+        //уменьшаем счетчик
+        size--;
+    }
+}
+удаление с конца списка pop_back():
+template<typename T>
+void List<T>::pop_back()
+{
+    removeAt(size-1);
+}
 
 */
 template <typename T>
@@ -299,6 +337,8 @@ public:
     void insert(T value, int index);
     //удаление по индексу
     void removeAt(int index);
+    //удаление с конца списка
+    void pop_back();
 private:
     //вложенный класс Node, хранящий данные и указатель элемента списка
     template <typename T>
@@ -484,6 +524,12 @@ void List<T>::removeAt(int index)
     }
 }
 
+template<typename T>
+void List<T>::pop_back()
+{
+    removeAt(size-1);
+}
+
 int main()
 {
     SetConsoleCP(1251);
@@ -500,9 +546,9 @@ int main()
         //вывод элементов списка
         cout << lst[i] << endl;
     }
-    cout << endl << "выполняю метод removeAt" << endl << endl;
+    cout << endl << "выполняю метод pop_back" << endl << endl;
 
-    lst.removeAt(1);
+    lst.pop_back();
 
     // если текущий индекс меньше чем колличество элементов в списке, то мы можем итерироваться по нему дальше
         for (size_t i = 0; i < lst.GetSize(); i++)
